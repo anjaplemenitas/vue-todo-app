@@ -1,5 +1,7 @@
 <template>
-  <div>Hello</div>
+  <div class="container mx-auto">
+    <h2 class="text-center mt-5">My Vue Todo App</h2>
+  </div>
 </template>
 
 <script>
