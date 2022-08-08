@@ -21,63 +21,63 @@
     <!-- task table -->
     <div class="container flex justify-center mx-auto mt-5">
       <div class="flex flex-col">
-        <div class="w-full">
-          <div class="border-b border-gray-200 shadow">
-            <table class="divide-y divide-gray-300">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th class="px-6 py-2 text-xs text-gray-500">
-                    Task
-                  </th>
-                  <th class="px-6 py-2 text-xs text-gray-500">
-                    Status
-                  </th>
-                  <th class="px-6 py-2 text-xs text-gray-500">
-                    #
-                  </th>
-                  <th class="px-6 py-2 text-xs text-gray-500">
-                    #
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="bg-white divide-y divide-gray-300">
-                <tr
-                  class="whitespace-nowrap"
-                  v-for="(task, index) in tasks"
-                  :key="index"
-                >
-                  <td class="px-6 py-4">
-                    <div class="text-sm text-gray-900">
-                      {{ task.name }}
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="text-sm text-gray-500">{{ task.status }}</div>
-                  </td>
+        <!-- <div class="w-full"> -->
+        <div class="border-b border-gray-200 shadow">
+          <table class="divide-y divide-gray-300" style="width: 50rem;">
+            <thead class="text-left bg-gray-50">
+              <tr>
+                <th class="pl-5 py-2 text-xs text-gray-500">
+                  Task
+                </th>
+                <th class="pl-5 py-2 w-40 text-xs text-gray-500">
+                  Status
+                </th>
+                <th class="py-2 text-xs text-gray-500"></th>
+                <th class="py-2 text-xs text-gray-500"></th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-300">
+              <tr
+                class="whitespace-nowrap"
+                v-for="(task, index) in tasks"
+                :key="index"
+              >
+                <td class="px-6 py-4">
+                  <div class="text-sm text-gray-900">
+                    {{ task.name }}
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="text-sm text-gray-500">
+                    <span @click="changeStatus(index)" class="cursor-pointer">
+                      {{ task.status }}
+                    </span>
+                  </div>
+                </td>
 
-                  <td class="px-6 py-4">
-                    <div
-                      @click="editTask(index)"
-                      class="px-4 py-1 text-sm text-black-600 bg-blue-100 rounded-full"
-                    >
-                      <span class="fa fa-pen"></span>
-                    </div>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div
-                      @click="deleteTask(index)"
-                      class="px-4 py-1 text-sm text-black-400 bg-red-100 rounded-full"
-                    >
-                      <span class="fa fa-trash"></span>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                <td class="w-20 px-6 py-4">
+                  <div
+                    @click="editTask(index)"
+                    class="text-center px-4 py-1 text-sm text-black-600 bg-blue-100 rounded-full"
+                  >
+                    <span class="fa fa-pen"></span>
+                  </div>
+                </td>
+                <td class="w-20 px-6 py-4">
+                  <div
+                    @click="deleteTask(index)"
+                    class="text-center px-4 py-1 text-sm text-black-400 bg-red-100 rounded-full"
+                  >
+                    <span class="fa fa-trash"></span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -91,6 +91,7 @@ export default {
     return {
       task: '',
       editedTask: null,
+      avaliableStatuses: ['to-do', 'in-progress', 'done'],
       tasks: [
         { name: 'Learn Css', status: 'to-do' },
         { name: 'bom', status: 'to-do' },
@@ -117,6 +118,12 @@ export default {
     editTask(index) {
       this.task = this.tasks[index].name
       this.editedTask = index
+    },
+
+    changeStatus(index) {
+      let newIndex = this.avaliableStatuses.indexOf(this.tasks[index].status)
+      if (++newIndex > 2) newIndex = 0
+      this.tasks[index].status = this.avaliableStatuses[newIndex]
     },
   },
 }
