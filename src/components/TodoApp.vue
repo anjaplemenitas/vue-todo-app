@@ -21,7 +21,6 @@
     <!-- task table -->
     <div class="container flex justify-center mx-auto mt-5">
       <div class="flex flex-col">
-        <!-- <div class="w-full"> -->
         <div class="border-b border-gray-200 shadow">
           <table class="divide-y divide-gray-300" style="width: 50rem;">
             <thead class="text-left bg-gray-50">
@@ -30,7 +29,7 @@
                   Task
                 </th>
                 <th class="pl-5 py-2 w-40 text-xs text-gray-500">
-                  {{ task.status }}
+                  Status
                 </th>
                 <th class="py-2 text-xs text-gray-500"></th>
                 <th class="py-2 text-xs text-gray-500"></th>
@@ -44,7 +43,9 @@
               >
                 <td class="px-6 py-4">
                   <div class="text-sm text-gray-900">
-                    {{ task.name }}
+                    <span :class="{ 'line-through': task.status === 'Done' }">
+                      {{ task.name }}
+                    </span>
                   </div>
                 </td>
                 <td class="px-6 py-4">
@@ -77,7 +78,6 @@
         </div>
       </div>
     </div>
-    <!-- </div> -->
   </div>
 </template>
 
@@ -93,8 +93,8 @@ export default {
       editedTask: null,
       avaliableStatuses: ['To-do', 'In-progress', 'Done'],
       tasks: [
-        { name: 'Learn Css', status: 'to-do' },
-        { name: 'bom', status: 'to-do' },
+        { name: 'Learn Vue', status: 'To-do' },
+        { name: 'Practice HTML, CSS', status: 'To-do' },
       ],
     }
   },
@@ -130,4 +130,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.pointer {
+  cursor: pointer;
+}
+</style>
