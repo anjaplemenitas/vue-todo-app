@@ -39,14 +39,18 @@
                 </tr>
               </thead>
               <tbody class="bg-white divide-y divide-gray-300">
-                <tr class="whitespace-nowrap">
+                <tr
+                  class="whitespace-nowrap"
+                  v-for="(task, index) in tasks"
+                  :key="index"
+                >
                   <td class="px-6 py-4">
                     <div class="text-sm text-gray-900">
-                      Jon doe
+                      {{ task.name }}
                     </div>
                   </td>
                   <td class="px-6 py-4">
-                    <div class="text-sm text-gray-500">To do css</div>
+                    <div class="text-sm text-gray-500">{{ task.status }}</div>
                   </td>
 
                   <td class="px-6 py-4">
@@ -80,6 +84,14 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      tasks: [
+        { name: 'Learn Css', status: 'to-do' },
+        { name: 'bom', status: 'to-do' },
+      ],
+    }
   },
 }
 </script>
