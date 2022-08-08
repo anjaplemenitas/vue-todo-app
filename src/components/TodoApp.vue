@@ -5,11 +5,13 @@
     <!-- input -->
     <div class="text-center">
       <input
+        v-model="task"
         type="text"
         placeholder="Enter task"
         class="shadow appearance-none border rounded w-6/12 py-2 px-3 text-grey-darker"
       />
       <button
+        @click="submitTask"
         class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
       >
         Submit
@@ -54,20 +56,20 @@
                   </td>
 
                   <td class="px-6 py-4">
-                    <a
-                      href="#"
+                    <div
+                      @click="editTask(index)"
                       class="px-4 py-1 text-sm text-black-600 bg-blue-100 rounded-full"
                     >
                       <span class="fa fa-pen"></span>
-                    </a>
+                    </div>
                   </td>
                   <td class="px-6 py-4">
-                    <a
-                      href="#"
+                    <div
+                      @click="deleteTask(index)"
                       class="px-4 py-1 text-sm text-black-400 bg-red-100 rounded-full"
                     >
                       <span class="fa fa-trash"></span>
-                    </a>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -87,11 +89,35 @@ export default {
   },
   data() {
     return {
+      task: '',
+      editedTask: null,
       tasks: [
         { name: 'Learn Css', status: 'to-do' },
         { name: 'bom', status: 'to-do' },
       ],
     }
+  },
+  methods: {
+    submitTask() {
+      if (this.task.lenght === 0) return
+
+      if (this.editedTask === null) {
+        this.tasks.push({ name: this.task, status: 'to-do' })
+      } else {
+        this.tasks[this.editedTask].name = this.task
+        this.editedTask = null
+      }
+      this.task = ''
+    },
+
+    deleteTask(index) {
+      this.tasks.splice(index, 1)
+    },
+
+    editTask(index) {
+      this.task = this.tasks[index].name
+      this.editedTask = index
+    },
   },
 }
 </script>
