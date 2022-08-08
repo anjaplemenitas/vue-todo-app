@@ -30,7 +30,7 @@
                   Task
                 </th>
                 <th class="pl-5 py-2 w-40 text-xs text-gray-500">
-                  Status
+                  {{ task.status }}
                 </th>
                 <th class="py-2 text-xs text-gray-500"></th>
                 <th class="py-2 text-xs text-gray-500"></th>
@@ -91,7 +91,7 @@ export default {
     return {
       task: '',
       editedTask: null,
-      avaliableStatuses: ['to-do', 'in-progress', 'done'],
+      avaliableStatuses: ['To-do', 'In-progress', 'Done'],
       tasks: [
         { name: 'Learn Css', status: 'to-do' },
         { name: 'bom', status: 'to-do' },
@@ -103,7 +103,7 @@ export default {
       if (this.task.lenght === 0) return
 
       if (this.editedTask === null) {
-        this.tasks.push({ name: this.task, status: 'to-do' })
+        this.tasks.push({ name: this.task, status: 'To-do' })
       } else {
         this.tasks[this.editedTask].name = this.task
         this.editedTask = null
